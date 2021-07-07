@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from django.conf.locale.es import formats as es_formats
+import django_heroku
+import dj_database_url
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -54,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'acirurgias.urls'
@@ -134,6 +138,7 @@ STATIC_URL = 'project3/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'dashboard/static')
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -157,5 +162,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'aplications.felpas@gmail.com'
 EMAIL_HOST_PASSWORD = 'ezbentfxbgvlxehw'
 
-
-
+django_heroku.settings(locals())
