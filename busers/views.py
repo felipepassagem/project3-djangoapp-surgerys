@@ -25,15 +25,14 @@ def  register(request):
         if password != confirmation:
             messages.error(request, 'As senhas precisam ser iguais.')
             return redirect('register')
-        try:
-            if User.objects.filter(email=email).exists():
-                messages.error(request, 'Usuário já cadastrado.')
-                return redirect('register')
-        except:
-            user = User.objects.create_user(username=username, password=password, email=email)
-            user.save()
-            messages.success(request, "Cadastro realizado com sucesso!")
-            return redirect('login')
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Usuário já cadastrado.')
+            return redirect('register')
+        
+        user = User.objects.create_user(username=username, password=password, email=email)
+        user.save()
+        messages.success(request, "Cadastro realizado com sucesso!")
+        return redirect('login')
     else:
         auth.logout(request)
         return render(request, 'busers/register.html')
