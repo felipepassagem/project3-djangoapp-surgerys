@@ -15,6 +15,8 @@ def  register(request):
         email = request.POST["email"]
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
+        emails = []
+        emails.append(list(User.objects.filter(email=email)))
         
         if is_null(username):
             messages.error(request, 'Nome de Usuário Inválido.')
