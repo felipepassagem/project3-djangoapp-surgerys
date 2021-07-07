@@ -1,0 +1,48 @@
+{% extends 'busers/base.html' %} 
+{% block content %}
+{% include 'partials/_navbar-out.html' %}
+{% include 'partials/_alerts.html' %}
+
+
+    
+    
+<div class="col d-flex justify-content-center mx-auto" style="padding-top: 5%;">
+<div class="card shadow rounded text-center" style="width: 25rem;">
+<div class="card-body">
+<h2>Faça seu cadastro!</h2>
+    <form action="{% url 'register'%}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Nome de usuário</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required>
+
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+
+        </div>
+        <div class="mb-3">
+            <label for="confirmation" class="form-label">Comfirme sua senha</label>
+            <input type="password" class="form-control" id="confirmation" name="confirmation" required>
+        </div>
+        <button type="submit" class="btn btn-info">Registrar</button>
+        <p class="pt-2">
+        Já é cadastrado?<a href="{% url 'login' %}" > Login</a>
+        </p>
+        
+    </form>
+    
+    </div>
+    </div>
+    </div>
+    
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,183 @@
+{% extends 'busers/base.html' %}
+{% block content %}
+{% include 'partials/_navbar-in.html' %}
+{% include 'partials/_alerts.html' %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+<div class='container p-3'>
+
+    <h5>
+    Update surgery...
+    </h5>
+    
+
+    <form action="" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+    {{form.client.label}}:
+    {{form.client}}
+    </div>
+   <div class="mb-3">
+    {{form.date.label}}:
+    </br>
+    {{form.date}}
+   </div>
+      <div class="mb-3">
+    {{form.quantity.label}}:
+    </br>
+    {{form.quantity}}
+    </div>
+    
+ 
+
+    <div id="form-div">
+
+    </div>
+   <div class="mb-3">
+    {{form.obs.label}}:
+    {{form.obs}}
+   </div>
+   <div class="mb-3">
+    {{form.stage.label}}:
+    {{form.stage}}
+   </div>
+   <div class="mb-3">
+    {{form.pmu.label}}:
+    {{form.pmu}}
+   </div>
+
+    
+
+    <input type="submit" value="Submit" class="btn btn-secondary" />
+    
+</form>
+   {% with c=0 %}
+   
+   {% for type in types %}
+   
+    <input type="text" value="{{type}}" id="{{forloop.counter}}" hidden></input>
+    {% endfor %}
+    {%endwith%}
+
+
+    {% with c=0 %}
+   
+   {% for area in areas %}
+   
+    <input type="text" value="{{area}}" class="{{forloop.counter}}" hidden></input>
+    {% endfor %}
+    {%endwith%}
+
+        {% with c=0 %}
+   
+   {% for size in sizes %}
+   
+    <input type="text" value="{{size}}" class="size{{forloop.counter}}" hidden></input>
+    {% endfor %}
+    {%endwith%}
+
+<div>
+{%block script%}
+
+<script>
+
+
+$(document).ready(GetValue())
+
+
+   function GetValue() {
+      
+      var quant = parseInt($("#id_quantity").val()) + 1
+      if (quant > 9){
+         return null
+      }
+      //crate area options
+      var area = 11
+      var areaoptions = []
+      var areaoption = "<option value='11'> 11 </option>"
+         for (var i = area; i < 49; i++) {
+            if (i != 19 && i != 20 && i != 29 && i != 30 && i != 39 && i != 40) {
+            areaoption = "<option value = '" + i + "'>"+i+"</option>"
+            areaoptions.push(areaoption)
+            }
+         }
+      
+      // create type options
+      var typeList = ['Neodent Alvim CM', 'Neodent Drive CM', 'Neodent Titamax WS CM','Nobel Replace CM', 'SIN SWC CM', 'SIN Strong CM', 'SIN Unitite CM']//if new type is needed add here and in models
+      var tlen = typeList.length
+      var typeoptions = []
+      for (i = 0; i < tlen; i++) {
+         var option = "<option value = '"+typeList[i]+"'>"+typeList[i]+"</option>"
+         typeoptions.push(option)
+      }
+      console.log(typeoptions)
+      // create dimensions options
+      var sizeList = ['3.5x8', '3.5x10', '3.5x11.5', '3.5x13', '3.5x15', '4.3x8', '4.3x10', '4.3x11.5', '4.3x13', '4.3x15', '4x5', '4x6', '5x5', '5x6', '6x5','6x6'] // if new size is needed add here and in models
+      var slen = sizeList.length
+      var sizeoptions = []
+      for (i = 0; i < slen; i++) {
+         var option = "<option value = '"+sizeList[i]+"'>"+sizeList[i]+"</option>"
+         sizeoptions.push(option)
+      }
+
+      var impOpt = []
+      for (i = 0; i < tlen; i++){
+         var impName = typeList[i]
+         for (j = 0; j < slen; j++){
+            var impSize = sizeList[j]
+            var fullImp = impName + " " + impSize
+            var option = "<option value = '"+fullImp+"'>"+fullImp+"</option>"
+            impOpt.push(option)
+         }
+      }
+
+
+      
+      impval = []
+      areaval = []
+      sizeval = []
+      var div = $("#form-div")
+      div.empty()
+      for (i = 1; i < quant; i++) {
+         impval.push($("#"+i+"").val())
+         areaval.push($("."+i+"").val())
+         sizeval.push($(".size"+i+"").val())
+         
+         
+         div.append('<label for="area'+i+'"> Implante '+i+': </label>');
+         div.append('<select id="area'+i+'" type="text" name="area'+i+'" class="form-control" placeholder="Area"  required></select>');
+         div.append('<select id="type'+i+'" name="type'+i+'" class="form-control" value="" required/>');
+         div.append('<select id="size'+i+'" name="size'+i+'" class="form-control" value="" required/>');
+         div.append('<br/>')
+
+         areaoptions.unshift("<option value='"+areaval[i-1]+"'>"+areaval[i-1]+"</option>")
+         typeoptions.unshift("<option value='"+impval[i-1]+"'>"+impval[i-1]+"</option>")
+         sizeoptions.unshift("<option value='"+sizeval[i-1]+"'>"+sizeval[i-1]+"</option>")
+
+         document.getElementById('area'+i+'').innerHTML = areaoptions;
+         document.getElementById('type'+i+'').innerHTML = typeoptions;
+         document.getElementById('size'+i+'').innerHTML = sizeoptions;
+         
+         areaoptions.shift()
+         typeoptions.shift()
+         sizeoptions.shift()
+         
+
+
+         //$("#type"+i+"" "option").filter(function() {
+         //   return this.text == text1; 
+         //   }).attr('selected', true);
+
+         
+         
+      }
+   }
+   
+
+</script>
+<script>
+
+</script>
+{%endblock%}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'ccip/base.html' %}
+{% block content %}
+{% include 'partials/_navbar-in.html' %}
+{% include 'partials/_alerts.html' %}
+<div class="container h-100 pt-5">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6">
+            <form action="" method='POST'>
+            {% csrf_token %}
+                <p class="description"><b>Coloque no formulário os dados do implante.</b></p>
+                <div class="pb-3">
+                {{form.full_name.label}}
+                {{form.full_name}}
+
+                {{form.birth_date.label}}
+                {{form.birth_date}}
+
+                {{form.gender.label}}
+                {{form.gender}}
+
+                {{form.phone.label}}
+                {{form.phone}}
+
+                {{form.obs.label}}
+                {{form.obs}}
+                </div>
+                <input type="submit" value="Submit" class="btn btn-secondary">
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

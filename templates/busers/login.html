@@ -1,0 +1,39 @@
+{% extends 'busers/base.html' %} 
+
+{% block content %}
+{% include 'partials/_navbar-out.html' %}
+{% include 'partials/_alerts.html' %}
+
+<!--<div class="offset-md-4 col-md-4" style="padding-top: 5%;">-->
+<div class="row h-100">
+<div class="col d-flex justify-content-center my-auto" style="padding-top: 5%;">
+<div class="card shadow rounded text-center" style="width: 25rem;">
+  <div class="card-body">
+    <h2>Login</h2>
+    
+
+    <form action="{% url 'login'%}" method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required>
+
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">Login</button>
+        <p class='pt-2'>
+        Ainda não é cadstrado?<a href="{% url 'register' %}" > Cadastrar</button></a>
+        </p>
+        
+    </form>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

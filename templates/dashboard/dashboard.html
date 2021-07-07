@@ -1,0 +1,215 @@
+{% extends 'busers/base.html' %}
+{% load static %}
+{%block style%}
+<link href="{% static 'dashboard/css/styles.css' %}" rel="stylesheet" />
+{%endblock%}
+{%block content%}
+    <script type="text/javascript" src="{% static "dashboard/js/fusioncharts.js" %}"></script>
+    <script type="text/javascript" src="{% static "dashboard/js/fusioncharts.charts.js" %}"></script>
+    <script type="text/javascript" src="{% static "dashboard/js/themes/fusioncharts.theme.fusion.js" %}"></script>
+{% include 'partials/_navbar-in.html' %}
+
+
+<!--cards-->
+<div class="container-fluid">
+  <div class="row" id="cards">
+          <div class="col-sm pt-3">
+              <div class="card shadow rounded text-center">
+                  <div class="card-body bg-success" id="card-income">
+                      <h5 class="card-title">Total de Cirurgias</h5>
+                      <p class="card-text text-dark">{{ n_surg }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm pt-3 ">
+              <div class="card shadow rounded text-center">
+                  <div class="card-body bg-info " id="card-outcome">
+                      <h5 class="card-title ">Total de Implantes</h5>
+                      <p class="card-text text-dark">{{ n }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm pt-3">
+              <div class="card shadow rounded text-center">
+                  <div class="card-body bg-light" id="card-balance">
+                      <h5 class="card-title">Implante / Cirurgia</h5>
+                      <p class="card-text text-dark">{{ ratio }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm pt-3">
+              <div class="card shadow rounded text-center">
+                  <div class="card-body bg-primary" id="card-balance">
+                      <h5 class="card-title">Média de Idade</h5>
+                      <p class="card-text text-dark">{{ ages_ratio }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm pt-3">
+              <div class="card shadow rounded text-center">
+                  <div class="card-body bg-warning" id="card-balance">
+                      <h6 class="card-text text-dark pb-1">{{ ini_date }}</h6>
+                      <h6 class="card-text text-dark pt-1 pb-1">{{ final_date }}</h6>
+                  </div>
+              </div>
+          </div>
+          
+  </div>
+<!--cards end-->
+
+
+
+<!--Primeira row-->
+  <div class="row justify-content-center align-items-center p-3" id="" >
+        <div class="col-md-6 " align="center" id="asd">
+        <div class="border shadow p-3 mb-5 bg-white rounded">
+          <nav clas="nav justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#type_chart_col-container" role="tab" aria-controls="nav-home" aria-selected="false">Col</a>
+              <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#type_chart_pie-container" role="tab" aria-controls="nav-profile" aria-selected="false">Pie</a>
+              
+          </nav>
+    <ul>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="type_chart_col-container" role="tabpanel" aria-labelledby="nav-home-tab">{{type_chart_col|safe}}</div>
+            <div class="tab-pane fade show " id="type_chart_pie-container" role="tabpanel" aria-labelledby="nav-profile-tab">{{type_chart_pie|safe}}</div>
+          </div>
+        </div>
+        </div>
+    </ul>
+
+    <div class="col-md-6 " align="center" id="g-div">
+    <div class="border shadow p-3 mb-5 bg-white rounded">
+          <nav clas="nav justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#size_chart_pie-container" role="tab" aria-controls="nav-home" aria-selected="true">Pie</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#size_chart_col-container" role="tab" aria-controls="nav-profile" aria-selected="false">Col</a>
+            </div>
+          </nav>
+            <ul>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="size_chart_pie-container" role="tabpanel" aria-labelledby="nav-home-tab">{{size_chart_pie|safe}}</div>
+                <div class="tab-pane fade" id="size_chart_col-container" role="tabpanel" aria-labelledby="nav-profile-tab">{{size_chart_col|safe}}</div>
+              </div>
+            </ul>
+            </div>
+        </div>
+  </div>
+<!--fim da Primeira row-->
+<!--segunda row-->
+  <div class="row h-100 justify-content-center align-items-center" >
+    <div class="col-lg " align="center">
+      <div class="border shadow p-3 mb-5 bg-white rounded">
+          <nav clas="nav justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#size_type_chart_col-container" role="tab" aria-controls="nav-profile" aria-selected="true">Col</a>
+              <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#size_type_chart_pie-container" role="tab" aria-controls="nav-home" aria-selected="false">Pie</a>
+              
+          </nav>
+      <ul>
+        <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="size_type_chart_col-container" role="tabpanel" aria-labelledby="nav-profile-tab">{{size_type_chart_col|safe}}</div>
+              <div class="tab-pane fade" id="size_type_chart_pie-container" role="tabpanel" aria-labelledby="nav-home-tab">{{size_type_chart_pie|safe}}</div>
+              
+          </div>
+        </div>
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Primeira row fim-->
+
+  <div class="row justify-content-center align-items-center p-3" id="" >
+        <div class="col-md-6 " align="center" id="asd">
+        <div class="border shadow p-3 mb-5 bg-white rounded">
+          <nav clas="nav justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#month_chart_col-container" role="tab" aria-controls="nav-home" aria-selected="false">Col</a>
+              <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#month_chart_pie-container" role="tab" aria-controls="nav-profile" aria-selected="false">Pie</a>
+              
+          </nav>
+    <ul>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="month_chart_col-container" role="tabpanel" aria-labelledby="nav-home-tab">{{month_chart_col|safe}}</div>
+            <div class="tab-pane fade show " id="month_chart_pie-container" role="tabpanel" aria-labelledby="nav-profile-tab">{{month_chart_pie|safe}}</div>
+          </div>
+        </div>
+        </div>
+    </ul>
+
+    <div class="col-md-6 " align="center" id="g-div">
+    <div class="border shadow p-3 mb-5 bg-white rounded">
+          <nav clas="nav justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#area_chart_pie-container" role="tab" aria-controls="nav-home" aria-selected="true">Pie</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#area_chart_col-container" role="tab" aria-controls="nav-profile" aria-selected="false">Col</a>
+            </div>
+          </nav>
+            <ul>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="area_chart_pie-container" role="tabpanel" aria-labelledby="nav-home-tab">{{area_chart_pie|safe}}</div>
+                <div class="tab-pane fade" id="area_chart_col-container" role="tabpanel" aria-labelledby="nav-profile-tab">{{area_chart_col|safe}}</div>
+              </div>
+            </ul>
+            </div>
+
+        
+        </div>
+
+        
+
+        
+
+  </div>
+
+  <div class="row justify-content-center align-items-center p-3" id="" >
+        <div class="col-md-6 " align="center" id="asd">
+        <div class="border shadow p-3 mb-5 bg-white rounded">
+          <nav clas="nav justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#pmu_chart_col-container" role="tab" aria-controls="nav-home" aria-selected="false">Col</a>
+              <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#pmu_chart_pie-container" role="tab" aria-controls="nav-profile" aria-selected="false">Pie</a>
+              
+          </nav>
+    <ul>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="pmu_chart_col-container" role="tabpanel" aria-labelledby="nav-home-tab">{{pmu_chart_col|safe}}</div>
+            <div class="tab-pane fade show " id="pmu_chart_pie-container" role="tabpanel" aria-labelledby="nav-profile-tab">{{pmu_chart_pie|safe}}</div>
+          </div>
+        </div>
+        </div>
+    </ul>
+
+    <div class="col-md-6 " align="center" id="g-div">
+    <div class="border shadow p-3 mb-5 bg-white rounded">
+          <nav clas="nav justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#gender_chart_pie-container" role="tab" aria-controls="nav-home" aria-selected="true">Pie</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#gender_chart_col-container" role="tab" aria-controls="nav-profile" aria-selected="false">Col</a>
+            </div>
+          </nav>
+            <ul>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="gender_chart_pie-container" role="tabpanel" aria-labelledby="nav-home-tab">{{gender_chart_pie|safe}}</div>
+                <div class="tab-pane fade" id="gender_chart_col-container" role="tabpanel" aria-labelledby="nav-profile-tab">{{gender_chart_col|safe}}</div>
+              </div>
+            </ul>
+            
+          
+        
+        </div>
+
+  
+
+
+
+<script>
+$(document.body).css("color", "black")
+</script>
+
+    
+    {%endblock%}
+    {{type_chart_pie|safe}}
+    {{type_chart_col|safe}}
+        <div id="myFirstchart-container">{{ output|safe }}</div>

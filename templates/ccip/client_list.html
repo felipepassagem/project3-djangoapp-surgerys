@@ -1,0 +1,36 @@
+{% extends 'ccip/base.html' %}
+{% block content %}
+{% include 'partials/_navbar-in.html' %}
+{% include 'partials/_alerts.html' %}
+
+
+
+<table class="table table-striped table-bordered table-hover table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" style="text-align: center; vertical-align: middle;">Nome</th>
+      <th scope="col" style="text-align: center; vertical-align: middle;">Telefone</th>
+      <th scope="col" style="text-align: center; vertical-align: middle;">Data de nascimento</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for client in clients %}
+    <tr>
+      <th scope="row" style="text-align: center; vertical-align: middle;">{{client.full_name}}</th>
+      <td style="text-align: center; vertical-align: middle;">
+      {{client.phone}}
+      </td>
+      <td style="text-align: center; vertical-align: middle;">
+      {{client.birth_date|date:"d/m/Y" }}
+      </td>
+      <td style="text-align: center; vertical-align: middle;">
+      <a href="{% url 'update_client' client.id %}"><button type="button" class="btn btn-success">Edit</button></a>
+      <a href="{% url 'delete_client' client.id %}"><button type="button" class="btn btn-danger">Del</button></a>
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+
+</table>
+{% endblock %}

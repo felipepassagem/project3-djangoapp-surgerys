@@ -1,0 +1,25 @@
+{% extends 'busers/base.html' %}
+{% block content %}
+{% include 'partials/_navbar-in.html' %}
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6 pt-5">
+            <!-- Form -->
+            <form class="form-example" action="quant" method="POST">
+            {% csrf_token %} 
+                <p class="description"><b>Coloque no formulário qunatos implantes foram utilizados na cirurgia.</b></p>
+                <!-- Input fields -->
+                <div class="form-group">
+                    <label for="quantity">Quantidade de implantes:</label>
+                    <input type="number" class="form-control" min="1" max="8" id="quant" name="quant">
+                    
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn">Submit</button>
+                <!-- End input fields -->
+                
+            </form>
+            <!-- Form end -->
+        </div>
+    </div>
+</div>
+{%endblock%}
