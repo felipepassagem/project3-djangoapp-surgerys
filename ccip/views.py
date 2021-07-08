@@ -304,8 +304,9 @@ def update_client(request, client_id):
             user = get_object_or_404(User, pk=request.user.id)
             name = request.POST['full_name']
             birth = request.POST['birth_date']
+            gender = request.POST['gender']
             phone = request.POST['phone']
             obs = request.POST['obs']
-            clients = Client.objects.all().filter(user=user, pk=client_id).update(full_name = name, birth_date = birth, phone = phone, obs = obs)
+            clients = Client.objects.all().filter(user=user, pk=client_id).update(full_name = name, birth_date = birth,gender = gender, phone = phone, obs = obs)
             messages.success(request, "Dados do cliente atualizados com sucesso!")
             return redirect('client_list')
